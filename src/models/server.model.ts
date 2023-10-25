@@ -1,12 +1,11 @@
 import express, { Express } from 'express';
 import cors from 'cors';
-import { dbConnection } from '../database/db-config'
 
 export class Server {
     app: Express;
     port: string;
     paths: { [key: string]: string };
-    
+
     constructor() {
         this.app = express();
         this.port = process.env.PORT || '8080';
@@ -15,16 +14,10 @@ export class Server {
         }
         this.middlewares();
         this.routes();
-        this.connectToDB();
-    }
-
-    //Función de conexión
-    async connectToDB() {
-        await dbConnection();
     }
 
     middlewares () {
-        //CORS 
+        //CORS
         this.app.use(cors());
 
         //Read and parse the Body
